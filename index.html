@@ -9,6 +9,50 @@
     <title>Form Validation</title>
   </head>
   <body>
-    <h1>Form Validation</h1>
+    <div class="container">
+      <form action="" novalidate>
+        <h1>User Registration</h1>
+        <div class="error-container">
+          <span class="error"></span>
+        </div>
+        <ul>
+          <li>
+            <label for="email" class="label">Email: </label>
+            <input
+              type="text"
+              id="email"
+              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"
+            />
+          </li>
+          <li>
+            <label for="country" class="label">Country: </label>
+            <input
+              type="text"
+              id="country"
+              pattern="^[A-Z][a-z]+(\s[A-Z][a-z]+){0,2}$"
+            />
+          </li>
+          <li>
+            <label for="zip" class="label">Zip Code: </label>
+            <input type="text" id="zip" pattern="^\d{5}(-\d{4})?$" />
+          </li>
+          <li>
+            <label for="password1" class="label">Password: </label>
+            <input
+              type="password"
+              id="password1"
+              pattern="^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])[a-zA-Z0-9!@#\$%\^&\*]{8,30}$"
+            />
+          </li>
+          <li>
+            <label for="password2" class="label">Password Confirmation: </label>
+            <input type="password" id="password2" />
+          </li>
+          <li>
+            <button>Login</button>
+          </li>
+        </ul>
+      </form>
+    </div>
   </body>
 </html>

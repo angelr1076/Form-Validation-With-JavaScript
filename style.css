@@ -1,0 +1,102 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+.container {
+  text-align: center;
+  padding: 1em;
+}
+
+body {
+  background-color: #fff;
+  color: #333;
+  font: 1em / 1.4 Helvetica Neue, Helvetica, Arial, sans-serif;
+  padding: 1em;
+  margin: 0;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5em;
+  border-radius: 3px;
+  gap: 1em;
+}
+
+button {
+  font-size: 1.2rem;
+  margin: 0 auto;
+  padding: 1rem 2.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  height: 2.5em;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background-color: #333;
+  color: #fff;
+}
+
+input[type='email'],
+input[type='text'],
+input[type='password'] {
+  display: flex;
+  border: 1px solid #333;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 1.5rem;
+  padding: 0.5em;
+}
+
+#email:invalid {
+  border-color: #900;
+  background-color: #fdd;
+}
+
+input:focus:invalid {
+  outline: none;
+}
+
+/* This is the style of our error messages */
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error {
+  width: 50%;
+  padding: 1em;
+  margin: 0.25em;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  color: white;
+  background-color: #900;
+  border-radius: 5px;
+  visibility: hidden;
+}
+
+.error.active {
+  display: inline-block;
+  visibility: visible;
+  padding: 0.3em;
+}
+
+.inactive {
+  pointer-events: none;
+  opacity: 0.5;
+  background: #ccc;
+}
