@@ -5,6 +5,7 @@ const zip = document.querySelector('#zip');
 const password1 = document.querySelector('#password1');
 const password2 = document.querySelector('#password2');
 const errorMsgSpan = document.querySelector('.error');
+const msgSpan = document.querySelector('.msg');
 
 email.addEventListener('input', e => {
   if (!email.validity.patternMismatch) {
@@ -42,6 +43,7 @@ zip.addEventListener('input', e => {
 password1.addEventListener('input', e => {
   if (!password1.validity.patternMismatch) {
     // reset error message view
+    inactiveField();
     errorMsgSpan.textContent = '';
     errorMsgSpan.className = 'error';
   } else {
@@ -51,24 +53,46 @@ password1.addEventListener('input', e => {
   }
 });
 
-password2.addEventListener('input', e => {
-  matchFields(password1, password2);
-});
-
 function matchFields(pass1, pass2) {
   pass1 = password1.value;
   pass2 = password2.value;
-  if (pass1 && pass2 !== pass1) {
-    errorToggle();
-    errorMsgSpan.textContent = 'Passwords must match.';
-    return false;
-  } else if (!pass1) {
+  if (pass1 === undefined || pass1 === null) {
     inactiveField();
+  } else if (pass1 !== null && pass2 === pass1) {
+    errorToggle();
+    hideErrorMsg();
   } else {
     errorToggle();
     errorMsgSpan.textContent = 'Passwords must match.';
   }
 }
+
+password2.addEventListener('input', e => {
+  if (!password2.validity.patternMismatch) {
+    // reset error message view
+    inactiveField();
+    errorMsgSpan.textContent = '';
+    errorMsgSpan.className = 'error';
+  } else {
+    inactiveField();
+    console.log(password2.validationMessage);
+    matchFields(password1.value, password2.value);
+    showError();
+  }
+});
+
+// event listeners for each element
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  if (!form.checkValidity()) {
+    console.log(e);
+    showError();
+  } else {
+    msgToggle();
+    msgSpan.innerHTML = '✋ High Five!';
+    clearFields();
+  }
+});
 
 function inactiveField() {
   if (password1.value.length < 1) {
@@ -78,17 +102,26 @@ function inactiveField() {
   }
 }
 
-// Validate form function here
+inactiveField();
 
 function clearFields() {
-  uname.value = '';
   email.value = '';
-  phone.value = '';
-  comment.value = '';
+  country.value = '';
+  zip.value = '';
+  password1.value = '';
+  password2.value = '';
 }
 
 function errorToggle() {
   errorMsgSpan.classList.add('active');
+}
+
+function msgToggle() {
+  msgSpan.classList.add('active');
+}
+
+function hideErrorMsg() {
+  errorMsgSpan.classList.remove('active');
 }
 
 function showError() {
@@ -105,6 +138,10 @@ function showError() {
     errorMsgSpan.textContent =
       'Please enter a valid U.S. postal code. If adding the additional 4 digits for delivery route, please add a hyphen before the number. Example: 92101-0458';
   } else if (password1.validity.patternMismatch) {
+    errorToggle();
+    errorMsgSpan.textContent =
+      'Please enter a valid password between 4 and 30 characters in length including any of these symbols: !@#$%^&*';
+  } else if (password2.validity.patternMismatch) {
     errorToggle();
     errorMsgSpan.textContent =
       'Please enter a valid password between 4 and 30 characters in length including any of these symbols: !@#$%^&*';
